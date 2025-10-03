@@ -106,4 +106,44 @@ iteracion = 1
             indice = int(var[1:]) - 1
             solucion[indice] = tabla[i + 1][-1]
 
-      
+      valor_z = tabla[0][-1]
+    if not maximizar:
+        valor_z *= -1
+
+    print("\n--- SOLUCIÓN FINAL ---")
+    for i in range(num_variables):
+        print(f"x{i+1} = {solucion[i]:.2f}")
+    print(f"Valor óptimo de Z = {valor_z:.2f}")
+
+    def main():
+        print("Método Simplex paso a paso")
+        tipo = input("¿Deseas maximizar o minimizar? (max/min): ").strip().lower()
+        maximizar = (tipo == "max")
+
+        num_variables = int(input("Número de variables: "))
+        num_restricciones = int(input("Número de restricciones: "))
+
+    # Sacamos la función objetivo
+    coef_objetivo = []
+    print("Coeficientes de la función objetivo:")
+    for i in range(num_variables):
+        valor = float(input(f"Coeficiente de x{i+1}: "))
+        coef_objetivo.append(valor)
+
+    # Para terminar, volvemos con las restricciones
+    restricciones = []
+    lados_derechos = []
+    for i in range(num_restricciones):
+        print(f"Restricción {i+1}:")
+        fila = []
+        for j in range(num_variables):
+            valor = float(input(f"Coeficiente de x{j+1}: "))
+            fila.append(valor)
+        restricciones.append(fila)
+        lado = float(input("Valor del lado derecho: "))
+        lados_derechos.append(lado)
+
+    simplex(coef_objetivo, restricciones, lados_derechos, maximizar)
+
+    if __name__ == "__main__":
+          main()
