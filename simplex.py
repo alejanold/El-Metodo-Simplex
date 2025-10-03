@@ -89,3 +89,21 @@ iteracion = 1
                 factor = tabla[i][col_pivote]
                 for j in range(columnas):
                     tabla[i][j] -= factor * tabla[fila_pivote][j]
+
+      # Ahora volvemos a formar las variables básicas
+        if col_pivote < num_variables:
+            basicas[fila_pivote - 1] = f"x{col_pivote+1}"
+        else:
+            basicas[fila_pivote - 1] = f"s{col_pivote - num_variables + 1}"
+
+        imprimir_tabla(tabla, variables, basicas)
+        iteracion += 1
+
+    # Ya para obtener la solución
+    solucion = [0.0 for _ in range(num_variables)]
+    for i, var in enumerate(basicas):
+        if var.startswith("x"):
+            indice = int(var[1:]) - 1
+            solucion[indice] = tabla[i + 1][-1]
+
+      
