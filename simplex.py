@@ -78,3 +78,14 @@ iteracion = 1
             return
         print(f"\nIteración {iteracion}: Columna pivote = {col_pivote+1}, Fila pivote = {fila_pivote+1}")
 
+      # Ahora a establecer fila pivote
+        pivote = tabla[fila_pivote][col_pivote]
+        for j in range(columnas):
+            tabla[fila_pivote][j] /= pivote
+
+      # Convertir a ceros en la columna pivote
+        for i in range(filas):
+            if i != fila_pivote:
+                factor = tabla[i][col_pivote]
+                for j in range(columnas):
+                    tabla[i][j] -= factor * tabla[fila_pivote][j]
